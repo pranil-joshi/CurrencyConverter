@@ -29,7 +29,7 @@ A custom Magento 2 module that adds a storefront currency exchange converter, le
 - Fully **responsive** and keyboard/screen-reader friendly (`aria-live` rate
   updates, labelled form controls, no color-only state).
 
-<img width="823" height="682" alt="amount-conversion-1y" src="https://github.com/user-attachments/assets/885e5ef6-7e41-461f-ae0e-f0131e01f9c2" />
+<img width="823" height="682" alt="amount-conversion-1y" src="https://github.com/user-attachments/assets/e94a39c1-9668-42ee-ac83-9e6581595852" />
 
 
 ## Requirements
