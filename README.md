@@ -5,7 +5,9 @@ backed by the [Frankfurter](https://frankfurter.dev) exchange-rate API. Buyers c
 pick From/To currencies, view live exchange rates, swap the pair, and see how the
 rate has moved over time on a historical chart. Built for Magento 2.4.x / PHP 8.
 
-<img width="1345" height="847" alt="Screenshot from 2026-08-10 20-51-30" src="https://github.com/user-attachments/assets/4402a765-8c5e-4729-b192-c6b9ab350a49" />
+<img width="1345" height="920" alt="Screenshot from 2026-08-11 01-48-51" src="https://github.com/user-attachments/assets/2dd1e008-0a3e-4cf7-ac85-2316afc8913c" />
+
+<img width="458" height="918" alt="Screenshot from 2026-08-11 01-47-58" src="https://github.com/user-attachments/assets/b60f94f0-6ea3-46af-b70a-1a9823b79962" />
 
 
 ## Features
