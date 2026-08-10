@@ -60,7 +60,7 @@ bin/magento cache:flush
 
 ```bash
 composer config repositories.frankfurter-currency-converter path ../module-currency-converter
-composer require frankfurter/module-currency-converter:@dev
+composer require frankfurter/module-currency-converter
 
 bin/magento module:enable Frankfurter_CurrencyConverter
 bin/magento setup:upgrade
