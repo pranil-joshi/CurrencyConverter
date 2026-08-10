@@ -1,9 +1,9 @@
 # Frankfurter_CurrencyConverter
 
-A Magento 2 storefront module that adds a currency exchange converter page, backed
-by the [Frankfurter](https://frankfurter.dev) exchange-rate API.
-
-A custom Magento 2 module that adds a storefront currency exchange converter, letting buyers pick From/To currencies, view live exchange rates, swap currencies, and see how the rate has changed over time via a historical chart. Built on Magento 2.4.x / PHP 8 using the Frankfurter API.
+A custom Magento 2 storefront module that adds a currency exchange converter page,
+backed by the [Frankfurter](https://frankfurter.dev) exchange-rate API. Buyers can
+pick From/To currencies, view live exchange rates, swap the pair, and see how the
+rate has moved over time on a historical chart. Built for Magento 2.4.x / PHP 8.
 
 <img width="1345" height="847" alt="Screenshot from 2026-08-10 20-51-30" src="https://github.com/user-attachments/assets/4402a765-8c5e-4729-b192-c6b9ab350a49" />
 
@@ -36,7 +36,7 @@ A custom Magento 2 module that adds a storefront currency exchange converter, le
 
 | | Version |
 |---|---|
-| Magento | 2.4.x (built and tested against 2.4.6) |
+| Magento | 2.4.x (built and tested against 2.4.6 and 2.4.7) |
 | PHP | 8.1 / 8.2 / 8.3 |
 | Dependencies | None beyond Magento core (`magento/framework`, `magento/module-store`) — no third-party libraries |
 
@@ -44,11 +44,12 @@ Outbound internet access to `api.frankfurter.dev` is required from the web serve
 
 ## Installation
 
-### Option A — copy into `app/code`
+### Option A — clone into `app/code`
+
+From your Magento project root:
 
 ```bash
-mkdir -p app/code/Frankfurter
-cp -r module-currency-converter app/code/Frankfurter/CurrencyConverter
+git clone https://github.com/pranil-joshi/CurrencyConverter.git app/code/Frankfurter/CurrencyConverter
 
 bin/magento module:enable Frankfurter_CurrencyConverter
 bin/magento setup:upgrade
@@ -56,7 +57,14 @@ bin/magento setup:di:compile      # only needed outside developer mode
 bin/magento cache:flush
 ```
 
-### Option B — via Composer (path repository)
+After cloning, confirm that `registration.php` sits directly at
+`app/code/Frankfurter/CurrencyConverter/registration.php`. If the repository nests
+the module one level deeper, move the inner folder's contents up so that
+`registration.php` and `etc/module.xml` are at that path.
+
+### Option B — via Composer
+
+If the package is published to Packagist:
 
 ```bash
 composer require pranil-joshi/module-currency-converter
@@ -64,6 +72,17 @@ composer require pranil-joshi/module-currency-converter
 bin/magento module:enable Frankfurter_CurrencyConverter
 bin/magento setup:upgrade
 ```
+
+Or install directly from the Git repository without Packagist by adding a VCS
+repository to your project's `composer.json`:
+
+```json
+"repositories": [
+  { "type": "vcs", "url": "https://github.com/pranil-joshi/CurrencyConverter.git" }
+]
+```
+
+then run the same `composer require pranil-joshi/module-currency-converter`.
 
 Then visit **`/currencyconverter`** on the storefront.
 
@@ -128,4 +147,3 @@ and flushable independently under **Admin > System > Cache Management**.
   TTLs are constants in `Block/Converter.php` and `Model/CurrencyService.php`;
   promoting them to `system.xml` config would be a natural follow-up if this needed
   to be merchant-configurable.
-
