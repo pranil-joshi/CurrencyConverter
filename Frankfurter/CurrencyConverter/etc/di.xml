@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Frankfurter\CurrencyConverter\Api\CurrencyServiceInterface"
+                type="Frankfurter\CurrencyConverter\Model\CurrencyService"/>
+
+    <!-- Dedicated log file (var/log/frankfurter_currency_converter.log) instead of system.log. -->
+    <virtualType name="Frankfurter\CurrencyConverter\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/frankfurter_currency_converter.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Frankfurter\CurrencyConverter\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">frankfurterCurrencyConverter</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Frankfurter\CurrencyConverter\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Frankfurter\CurrencyConverter\Model\CurrencyService">
+        <arguments>
+            <argument name="logger" xsi:type="object">Frankfurter\CurrencyConverter\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Frankfurter\CurrencyConverter\Controller\Index\Rate">
+        <arguments>
+            <argument name="logger" xsi:type="object">Frankfurter\CurrencyConverter\Logger\Logger</argument>
+        </arguments>
+    </type>
+</config>

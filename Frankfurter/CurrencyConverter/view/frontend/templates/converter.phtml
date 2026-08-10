@@ -1,0 +1,103 @@
+<?php
+/** @var \Frankfurter\CurrencyConverter\Block\Converter $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$currencies = $block->getCurrencies();
+?>
+<div class="frankfurter-converter"
+     data-mage-init='{"Frankfurter_CurrencyConverter/js/converter": <?= /* @noEscape */ $block->getWidgetConfigJson() ?>}'>
+
+    <?php if (!$currencies): ?>
+        <div class="frankfurter-converter__notice" role="alert">
+            <?= $escaper->escapeHtml(__('The currency exchange service is currently unavailable. Please try again later.')) ?>
+        </div>
+    <?php else: ?>
+        <div class="frankfurter-converter__card">
+            <p class="frankfurter-converter__subtitle">
+                <?= $escaper->escapeHtml(__('Check the current rate and see how it has moved over time.')) ?>
+            </p>
+
+            <form class="frankfurter-converter__form" onsubmit="return false;">
+                <div class="frankfurter-converter__field">
+                    <label for="frankfurter-from"><?= $escaper->escapeHtml(__('From')) ?></label>
+                    <select id="frankfurter-from" name="from" class="frankfurter-converter__select">
+                        <?php foreach ($currencies as $code => $name): ?>
+                            <option value="<?= $escaper->escapeHtmlAttr($code) ?>"
+                                <?= $code === $block->getDefaultFrom() ? 'selected="selected"' : '' ?>>
+                                <?= $escaper->escapeHtml($code . ' - ' . $name) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <button type="button"
+                        id="frankfurter-swap"
+                        class="frankfurter-converter__swap"
+                        aria-label="<?= $escaper->escapeHtmlAttr(__('Swap currencies')) ?>"
+                        title="<?= $escaper->escapeHtmlAttr(__('Swap currencies')) ?>">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M6 9h13m0 0-4-4m4 4-4 4"/>
+                        <path d="M18 15H5m0 0 4 4m-4-4 4-4"/>
+                    </svg>
+                </button>
+
+                <div class="frankfurter-converter__field">
+                    <label for="frankfurter-to"><?= $escaper->escapeHtml(__('To')) ?></label>
+                    <select id="frankfurter-to" name="to" class="frankfurter-converter__select">
+                        <?php foreach ($currencies as $code => $name): ?>
+                            <option value="<?= $escaper->escapeHtmlAttr($code) ?>"
+                                <?= $code === $block->getDefaultTo() ? 'selected="selected"' : '' ?>>
+                                <?= $escaper->escapeHtml($code . ' - ' . $name) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </form>
+
+            <div class="frankfurter-converter__rate is-loading" id="frankfurter-rate" aria-live="polite">
+                <span class="frankfurter-converter__spinner" aria-hidden="true"></span>
+                <span class="frankfurter-converter__rate-loading"><?= $escaper->escapeHtml(__('Loading rate...')) ?></span>
+            </div>
+
+            <div class="frankfurter-converter__panel">
+                <div class="frankfurter-converter__panel-head">
+                    <div class="frankfurter-converter__amount">
+                        <label for="frankfurter-amount"><?= $escaper->escapeHtml(__('Amount')) ?></label>
+                        <div class="frankfurter-converter__amount-input">
+                            <input type="number"
+                                   id="frankfurter-amount"
+                                   min="0"
+                                   step="any"
+                                   inputmode="decimal"
+                                   value="1"
+                                   aria-describedby="frankfurter-amount-code">
+                            <span class="frankfurter-converter__amount-code" id="frankfurter-amount-code">
+                                <?= $escaper->escapeHtml($block->getDefaultFrom()) ?>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="frankfurter-converter__periods" id="frankfurter-periods" role="group"
+                         aria-label="<?= $escaper->escapeHtmlAttr(__('Time period')) ?>">
+                        <button type="button" class="frankfurter-converter__period" data-days="7"><?= $escaper->escapeHtml(__('7D')) ?></button>
+                        <button type="button" class="frankfurter-converter__period is-active" data-days="30"><?= $escaper->escapeHtml(__('1M')) ?></button>
+                        <button type="button" class="frankfurter-converter__period" data-days="90"><?= $escaper->escapeHtml(__('3M')) ?></button>
+                        <button type="button" class="frankfurter-converter__period" data-days="365"><?= $escaper->escapeHtml(__('1Y')) ?></button>
+                    </div>
+                </div>
+
+                <div class="frankfurter-converter__chart-wrapper" id="frankfurter-chart-wrapper">
+                    <canvas id="frankfurter-chart" class="frankfurter-converter__chart" height="280"></canvas>
+                    <canvas id="frankfurter-chart-overlay" class="frankfurter-converter__chart-overlay" height="280"></canvas>
+                    <div class="frankfurter-converter__chart-tooltip" id="frankfurter-chart-tooltip" hidden></div>
+                    <div class="frankfurter-converter__chart-empty" id="frankfurter-chart-empty" hidden>
+                        <?= $escaper->escapeHtml(__('No historical data available for this pair.')) ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="frankfurter-converter__error" id="frankfurter-error" role="alert" hidden></div>
+        </div>
+    <?php endif; ?>
+</div>

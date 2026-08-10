@@ -1,0 +1,19 @@
+{
+    "name": "frankfurter/module-currency-converter",
+    "description": "Magento 2 storefront module: a currency exchange converter backed by the Frankfurter API, with live rate lookup and historical charting.",
+    "type": "magento2-module",
+    "license": "MIT",
+    "require": {
+        "php": "~8.1.0||~8.2.0||~8.3.0",
+        "magento/framework": "*",
+        "magento/module-store": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Frankfurter\\CurrencyConverter\\": ""
+        }
+    }
+}

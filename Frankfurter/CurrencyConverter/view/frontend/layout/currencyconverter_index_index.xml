@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="1column">
+    <head>
+        <css src="Frankfurter_CurrencyConverter::css/converter.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <!--
+                Full-page cache is disabled for this block: the page's real content is fetched
+                live via AJAX on every load anyway, the currency list is already cached at the
+                service layer, and FPC's 24h max-age would otherwise "freeze" a rare upstream
+                Frankfurter API timeout into the cached page for the rest of that period. This
+                block is only used on this one dedicated route, so it does not affect FPC on any
+                other page.
+            -->
+            <block class="Frankfurter\CurrencyConverter\Block\Converter"
+                   name="currency.converter"
+                   template="Frankfurter_CurrencyConverter::converter.phtml"
+                   cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

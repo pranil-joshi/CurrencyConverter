@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/Cache/etc/cache.xsd">
+    <type name="frankfurter_currency" translate="label,description" instance="Frankfurter\CurrencyConverter\Model\Cache\Type">
+        <label>Frankfurter Currency Converter</label>
+        <description>Cached responses from the Frankfurter exchange-rate API (currency list, latest rates, history).</description>
+    </type>
+</config>
