@@ -1,10 +1,9 @@
-# CurrencyConverter
-A custom Magento 2 module that adds a storefront currency exchange converter, letting buyers pick From/To currencies, view live exchange rates, swap currencies, and see how the rate has changed over time via a historical chart. Built on Magento 2.4.x / PHP 8 using the Frankfurter API.
-
 # Frankfurter_CurrencyConverter
 
 A Magento 2 storefront module that adds a currency exchange converter page, backed
 by the [Frankfurter](https://frankfurter.dev) exchange-rate API.
+
+A custom Magento 2 module that adds a storefront currency exchange converter, letting buyers pick From/To currencies, view live exchange rates, swap currencies, and see how the rate has changed over time via a historical chart. Built on Magento 2.4.x / PHP 8 using the Frankfurter API.
 
 ![Converter overview](docs/screenshots/overview.png)
 
