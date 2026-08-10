@@ -1,5 +1,5 @@
 {
-    "name": "frankfurter/module-currency-converter",
+    "name": "pranil-joshi/module-currency-converter",
     "description": "Magento 2 storefront module: a currency exchange converter backed by the Frankfurter API, with live rate lookup and historical charting.",
     "type": "magento2-module",
     "license": "MIT",
