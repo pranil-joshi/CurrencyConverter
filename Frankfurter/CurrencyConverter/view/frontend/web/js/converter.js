@@ -140,8 +140,9 @@ define([
         emptyEl.hidden = true;
 
         width = canvas.clientWidth || canvas.width || 600;
-        height = canvas.height || 280;
+        height = canvas.clientHeight || canvas.height || 280;
         canvas.width = width;
+        canvas.height = height;
 
         ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, width, height);
@@ -546,6 +547,7 @@ define([
             hideTooltip();
             lastGeometry = drawChart(canvas, emptyEl, lastHistory || {});
             overlay.width = canvas.width;
+            overlay.height = canvas.height;
             overlay.hidden = !lastGeometry;
         }
 

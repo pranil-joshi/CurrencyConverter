@@ -372,8 +372,12 @@
 }
 
 @media (max-width: 520px) {
+    .frankfurter-converter {
+        padding: 20px 12px 40px;
+    }
+
     .frankfurter-converter__card {
-        padding: 22px;
+        padding: 18px;
     }
 
     .frankfurter-converter__form {
@@ -386,5 +390,39 @@
 
     .frankfurter-converter__swap {
         margin: 0 auto;
+    }
+
+    .frankfurter-converter__rate {
+        column-gap: 8px;
+        margin-top: 20px;
+    }
+
+    .frankfurter-converter__rate-value {
+        font-size: 21px;
+    }
+
+    .frankfurter-converter__rate-date {
+        font-size: 12px;
+        width: 100%;
+    }
+
+    .frankfurter-converter__panel {
+        padding: 14px 12px 6px;
+    }
+
+    .frankfurter-converter__amount-input input {
+        width: 64px;
+    }
+
+    .frankfurter-converter__period {
+        padding: 5px 8px;
+    }
+
+    .frankfurter-converter__chart {
+        height: 220px;
+    }
+
+    .frankfurter-converter__chart-overlay {
+        height: 220px;
     }
 }
