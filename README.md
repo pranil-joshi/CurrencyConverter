@@ -5,7 +5,8 @@ by the [Frankfurter](https://frankfurter.dev) exchange-rate API.
 
 A custom Magento 2 module that adds a storefront currency exchange converter, letting buyers pick From/To currencies, view live exchange rates, swap currencies, and see how the rate has changed over time via a historical chart. Built on Magento 2.4.x / PHP 8 using the Frankfurter API.
 
-![Converter overview](docs/screenshots/overview.png)
+<img width="1345" height="847" alt="Screenshot from 2026-08-10 20-51-30" src="https://github.com/user-attachments/assets/4402a765-8c5e-4729-b192-c6b9ab350a49" />
+
 
 ## Features
 
