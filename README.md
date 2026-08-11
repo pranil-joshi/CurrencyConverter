@@ -5,14 +5,14 @@ backed by the [Frankfurter](https://frankfurter.dev) exchange-rate API. Buyers c
 pick From/To currencies, view live exchange rates, swap the pair, and see how the
 rate has moved over time on a historical chart. Built for Magento 2.4.x / PHP 8.
 
-<img width="1345" height="920" alt="Screenshot from 2026-08-11 01-48-51" src="https://github.com/user-attachments/assets/2dd1e008-0a3e-4cf7-ac85-2316afc8913c" />
+<img width="1345" height="900" alt="Screenshot from 2026-08-11 11-10-11" src="https://github.com/user-attachments/assets/43f65043-6891-4eea-a31d-9cfd7ef2e0e0" />
 
-       <img width="458" height="918" alt="Screenshot from 2026-08-11 01-47-58" src="https://github.com/user-attachments/assets/b60f94f0-6ea3-46af-b70a-1a9823b79962" />
+<img width="458" height="918" alt="Screenshot from 2026-08-11 01-47-58" src="https://github.com/user-attachments/assets/b60f94f0-6ea3-46af-b70a-1a9823b79962" />
 
 
 ## Features
 
-- **Storefront page** at `/currencyconverter` — no admin configuration required.
+- **Storefront page** at `/currencyconverter` — works out of the box, no setup required.
 - **Any Frankfurter-supported currency** as From/To (currently 30 currencies), with
   a **swap control** to flip the pair instantly.
 - **Current exchange-rate lookup**, fetched server-side and cached.
@@ -28,6 +28,9 @@ rate has moved over time on a historical chart. Built for Magento 2.4.x / PHP 8.
   already in memory is simply scaled).
 - **Change badge** — shows the % move over the selected period, direction encoded
   with both an arrow icon and color (not color alone).
+- **Admin-configurable API endpoint** — the Frankfurter base URL is set in the
+  Admin panel, so the upstream endpoint can be pointed at a proxy or mirror without
+  a code change.
 - Fully **responsive** and keyboard/screen-reader friendly (`aria-live` rate
   updates, labelled form controls, no color-only state).
 
@@ -88,6 +91,16 @@ then run the same `composer require pranil-joshi/module-currency-converter`.
 
 Then visit **`/currencyconverter`** on the storefront.
 
+## Configuration
+
+The API endpoint is admin-configurable. You'll find it in Admin under
+**Stores → Configuration → General → Frankfurter Currency Converter**.
+
+The storefront page works with its shipped defaults, so no configuration is
+required to get started — the setting is there for merchants who need to point the
+module at a different Frankfurter host (for example, a caching proxy or an internal
+mirror) without editing code.
+
 ## Architecture
 
 ```
@@ -109,6 +122,8 @@ view/frontend/web/css/converter.css     All styling (no inline CSS/JS anywhere i
 
 etc/di.xml                              Interface preference + a dedicated Monolog logger/handler virtualType
 etc/cache.xml                           Registers the "frankfurter_currency" cache type
+etc/config.xml                          Default value for the admin-configurable API endpoint
+etc/adminhtml/system.xml                Adds the "Frankfurter Currency Converter" section under Stores > Configuration > General
 etc/frontend/routes.xml                 Registers the "currencyconverter" frontend route
 ```
 
@@ -142,7 +157,8 @@ and flushable independently under **Admin > System > Cache Management**.
 
 ## Notes / possible next steps
 
-- No admin configuration screen — the base/quote defaults (`USD`/`EUR`) and cache
-  TTLs are constants in `Block/Converter.php` and `Model/CurrencyService.php`;
-  promoting them to `system.xml` config would be a natural follow-up if this needed
-  to be merchant-configurable.
+- The API endpoint is admin-configurable (**Stores → Configuration → General →
+  Frankfurter Currency Converter**). The base/quote defaults (`USD`/`EUR`) and cache
+  TTLs are still constants in `Block/Converter.php` and `Model/CurrencyService.php`;
+  promoting those to `system.xml` config alongside the endpoint would be a natural
+  follow-up if they needed to be merchant-configurable too.
