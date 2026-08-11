@@ -6,6 +6,7 @@ namespace Frankfurter\CurrencyConverter\Model;
 use Frankfurter\CurrencyConverter\Api\CurrencyServiceInterface;
 use Frankfurter\CurrencyConverter\Model\Cache\Type as CurrencyCache;
 use Frankfurter\CurrencyConverter\Model\Exception\FrankfurterApiException;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\HTTP\Client\CurlFactory;
 use Magento\Framework\Serialize\Serializer\Json;
 use Psr\Log\LoggerInterface;
@@ -16,7 +17,8 @@ use Psr\Log\LoggerInterface;
  */
 class CurrencyService implements CurrencyServiceInterface
 {
-    private const API_BASE_URL = 'https://api.frankfurter.dev/v1/';
+    private const XML_PATH_API_BASE_URL = 'frankfurter_currencyconverter/general/api_base_url';
+    private const DEFAULT_API_BASE_URL = 'https://api.frankfurter.dev/v1/';
     private const CURRENCIES_CACHE_KEY = 'frankfurter_currencies';
     private const CURRENCIES_CACHE_LIFETIME = 86400;
     private const RATE_CACHE_LIFETIME = 300;
@@ -26,8 +28,20 @@ class CurrencyService implements CurrencyServiceInterface
         private readonly CurlFactory $curlFactory,
         private readonly Json $json,
         private readonly CurrencyCache $cache,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly ScopeConfigInterface $scopeConfig
     ) {
+    }
+
+    private function getApiBaseUrl(): string
+    {
+        $url = trim((string) $this->scopeConfig->getValue(self::XML_PATH_API_BASE_URL));
+
+        if ($url === '') {
+            return self::DEFAULT_API_BASE_URL;
+        }
+
+        return rtrim($url, '/') . '/';
     }
 
     /**
@@ -161,7 +175,7 @@ class CurrencyService implements CurrencyServiceInterface
      */
     private function request(string $path, array $params = []): array
     {
-        $url = self::API_BASE_URL . $path;
+        $url = $this->getApiBaseUrl() . $path;
         if ($params) {
             $url .= '?' . http_build_query($params);
         }

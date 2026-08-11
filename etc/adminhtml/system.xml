@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="frankfurter_currencyconverter" type="text" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Frankfurter Currency Converter</label>
+            <tab>general</tab>
+            <resource>Frankfurter_CurrencyConverter::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="api_base_url" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>API Base URL</label>
+                    <comment>Base URL of the Frankfurter API, including trailing slash (e.g. https://api.frankfurter.dev/v1/).</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
