@@ -7,7 +7,7 @@ rate has moved over time on a historical chart. Built for Magento 2.4.x / PHP 8.
 
 <img width="1345" height="920" alt="Screenshot from 2026-08-11 01-48-51" src="https://github.com/user-attachments/assets/2dd1e008-0a3e-4cf7-ac85-2316afc8913c" />
 
-<img width="458" height="918" alt="Screenshot from 2026-08-11 01-47-58" src="https://github.com/user-attachments/assets/b60f94f0-6ea3-46af-b70a-1a9823b79962" />
+       <img width="458" height="918" alt="Screenshot from 2026-08-11 01-47-58" src="https://github.com/user-attachments/assets/b60f94f0-6ea3-46af-b70a-1a9823b79962" />
 
 
 ## Features
@@ -142,9 +142,6 @@ and flushable independently under **Admin > System > Cache Management**.
 
 ## Notes / possible next steps
 
-- No automated tests are included; given more time, unit tests for
-  `CurrencyService` (mocking the Curl client) and an integration test for the
-  `Rate` controller would be the next addition.
 - No admin configuration screen — the base/quote defaults (`USD`/`EUR`) and cache
   TTLs are constants in `Block/Converter.php` and `Model/CurrencyService.php`;
   promoting them to `system.xml` config would be a natural follow-up if this needed
